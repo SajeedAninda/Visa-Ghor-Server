@@ -9,7 +9,7 @@ app.use(express.json());
 
 const port = process.env.PORT || 5000
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `${process.env.MONGO_URI}`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -34,14 +34,24 @@ async function run() {
             const result = await slipPriceCollection.find().toArray();
             res.send(result);
         });
+
+        // ADD SLIP PRICES 
         app.post("/addSlip", async (req, res) => {
             const slipDetails = req.body;
             const result = await slipPriceCollection.insertOne(slipDetails);
             res.send(result);
         });
 
-
-
+        // DELETE SLIPS 
+        app.delete("/slipList/:id", async (req, res) => {
+            const id = req.params.id;
+            console.log(id);
+            const query = {
+                _id: new ObjectId(id),
+            };
+            const result = await slipPriceCollection.deleteOne(query);
+            res.send(result);
+        });
 
 
 
