@@ -29,11 +29,16 @@ async function run() {
         // await client.db("admin").command({ ping: 1 });
         let slipPriceCollection = client.db("VisaGhor").collection("slipPricing");
 
+        // GET SLIP PRICES 
         app.get("/slipPrices", async (req, res) => {
             const result = await slipPriceCollection.find().toArray();
             res.send(result);
-          });
-
+        });
+        app.post("/addSlip", async (req, res) => {
+            const slipDetails = req.body;
+            const result = await slipPriceCollection.insertOne(slipDetails);
+            res.send(result);
+        });
 
 
 
