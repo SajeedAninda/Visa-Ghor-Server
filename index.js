@@ -64,6 +64,28 @@ async function run() {
         });
 
 
+        // UPDATE SLIP DETAILS 
+        app.patch("/updateSlipDetails/:id", async (req, res) => {
+            const id = req.params.id;
+            const data = req.body;
+            const filter = { _id: new ObjectId(id) };
+            const options = { upsert: true };
+            const updatedList = {
+                $set: {
+                    medicalName: data.medicalName,
+                    ksa: data.ksa,
+                    time: data.time
+                },
+            };
+            const result = await slipPriceCollection.updateOne(
+                filter,
+                updatedList,
+                options
+            );
+            res.send(result);
+        });
+
+
 
 
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
