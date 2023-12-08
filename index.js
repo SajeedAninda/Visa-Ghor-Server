@@ -74,7 +74,8 @@ async function run() {
                 $set: {
                     medicalName: data.medicalName,
                     ksa: data.ksa,
-                    time: data.time
+                    regular: data.regular,
+                    urgent: data.urgent
                 },
             };
             const result = await slipPriceCollection.updateOne(
