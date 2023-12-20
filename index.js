@@ -3,7 +3,9 @@ const express = require('express')
 let cors = require("cors");
 const app = express()
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://visaghor.com', 'http://localhost:5173', 'http://localhost:5174']
+}));
 app.use(express.json());
 
 
@@ -73,9 +75,8 @@ async function run() {
             const updatedList = {
                 $set: {
                     medicalName: data.medicalName,
-                    ksa: data.ksa,
-                    regular: data.regular,
-                    urgent: data.urgent
+                    ksaRegular: data.ksaRegular,
+                    ksaUrgent: data.ksaUrgent
                 },
             };
             const result = await slipPriceCollection.updateOne(
