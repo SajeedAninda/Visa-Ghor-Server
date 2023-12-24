@@ -67,7 +67,7 @@ async function run() {
 
 
         // UPDATE SLIP DETAILS 
-        app.patch("/updateSlipDetails/:id", async (req, res) => {
+        app.put("/updateSlipDetails/:id", async (req, res) => {
             const id = req.params.id;
             const data = req.body;
             const filter = { _id: new ObjectId(id) };
@@ -76,7 +76,7 @@ async function run() {
                 $set: {
                     medicalName: data.medicalName,
                     ksaRegular: data.ksaRegular,
-                    ksaUrgent: data.ksaUrgent
+                    location: data.location
                 },
             };
             const result = await slipPriceCollection.updateOne(
