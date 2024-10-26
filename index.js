@@ -4,7 +4,7 @@ let cors = require("cors");
 const app = express()
 
 app.use(cors({
-    origin: ['https://visaghor.com', 'http://localhost:5173', 'http://localhost:5174']
+    origin: ['https://visaghor.com', 'https://visa-ghor.web.app', 'http://localhost:5173', 'http://localhost:5174']
 }));
 app.use(express.json());
 
